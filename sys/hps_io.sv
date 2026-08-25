@@ -343,7 +343,7 @@ always@(posedge clk_sys) begin : uio_block
 				  'h29: io_dout <= {4'hA, stflg};
 				  'h32: io_dout <= gamma_bus[21];
 				  'h36: begin io_dout <= info_n; info_n <= 0; end
-				  'h3C: if(upload_req) begin io_dout <= {ioctl_upload_index, 8'd1}; upload_req <= 0; end
+				  'h3C: if(upload_req) begin io_dout <= {ioctl_upload_index, 8'd1}; upload_req <= 0; end				  
 				  'h43: io_dout <= |F12KEYMOD;
 				'h003F: io_dout <= joystick_0_rumble;
 				'h013F: io_dout <= joystick_1_rumble;
@@ -703,14 +703,14 @@ always@(posedge clk_sys) begin : fio_block
 							if(!skip_add) ioctl_addr <= ioctl_addr + (WIDE ? 2'd2 : 2'd1);
 							skip_add <= 0;
 							
-						if(ioctl_download) begin
-							ioctl_dout <= io_din[DW:0];
-							wr   <= 1;
-						end
-						else begin
-							fp_dout <= ioctl_din;
-							ioctl_rd <= 1;
-						end
+							if(ioctl_download) begin
+								ioctl_dout <= io_din[DW:0];
+								wr <= 1;
+							end
+							else begin
+								fp_dout <= ioctl_din;
+								ioctl_rd <= 1;
+							end
 						end
 				endcase
 			end

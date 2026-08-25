@@ -1430,33 +1430,33 @@ osd vga_osd
 wire vga_cs_osd;
 csync csync_vga(clk_vid, vga_hs_osd, vga_vs_osd, vga_cs_osd);
 
-	`ifndef MISTER_DISABLE_YC
-		reg         pal_en;
-		reg         yc_en;
-		reg         cvbs;
-		reg  [16:0] ColorBurst_Range;
-		wire [23:0] yc_o;
-		wire        yc_hs, yc_vs, yc_cs, yc_de;
+`ifndef MISTER_DISABLE_YC
+	reg         pal_en;
+	reg         yc_en;
+	reg         cvbs;
+	reg  [16:0] ColorBurst_Range;
+	wire [23:0] yc_o;
+	wire        yc_hs, yc_vs, yc_cs, yc_de;
 
-		yc_out yc_out
-		(
-			.clk(clk_vid),
-			.PAL_EN(pal_en),
-			.CVBS(cvbs),
-			.PHASE_INC(PhaseInc),
-			.COLORBURST_RANGE(ColorBurst_Range),
-			.hsync(vga_hs_osd),
-			.vsync(vga_vs_osd),
-			.csync(vga_cs_osd),
-			.de(vga_de_osd),
-			.dout(yc_o),
-			.din(vga_data_osd),
-			.hsync_o(yc_hs),
-			.vsync_o(yc_vs),
-			.csync_o(yc_cs),
-			.de_o(yc_de)
-		);
-	`endif
+	yc_out yc_out
+	(
+		.clk(clk_vid),
+		.PAL_EN(pal_en),
+		.CVBS(cvbs),
+		.PHASE_INC(PhaseInc),
+		.COLORBURST_RANGE(ColorBurst_Range),
+		.hsync(vga_hs_osd),
+		.vsync(vga_vs_osd),
+		.csync(vga_cs_osd),
+		.de(vga_de_osd),
+		.dout(yc_o),
+		.din(vga_data_osd),
+		.hsync_o(yc_hs),
+		.vsync_o(yc_vs),
+		.csync_o(yc_cs),
+		.de_o(yc_de)
+	);
+`endif
 
 reg  [39:0] PhaseInc;
 
